@@ -8,6 +8,8 @@ class Test < Minitest::Test
   def setup
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
+    @cell_1 = Cell.new("B4")
+    @cell_2 = Cell.new("C3")
   end
 
   def test_it_exists
@@ -38,5 +40,13 @@ class Test < Minitest::Test
     @cell.fire_upon
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon?
+  end
+
+  def test_render_location
+
+    assert_equal ".", @cell_1.render
+    @cell_1.fire_upon
+    assert_equal "M", @cell_1.fire_upon
+    @cell_2.place_ship(cruiser)
   end
 end
