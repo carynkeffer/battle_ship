@@ -21,4 +21,10 @@ class Board
     "D4" => Cell.new("D4")
       }
   end
+
+  def valid_coordinate?(coordinate)
+    @cells.one? do |key, cell|
+      key == coordinate
+    end
+  end
 end
