@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
 
-class Test < Minitest::Test
+class CellTest < Minitest::Test
 
   def setup
     @cell = Cell.new("B4")
