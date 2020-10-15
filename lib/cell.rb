@@ -21,21 +21,25 @@ class Cell
   end
 
   def fire_upon
-    if @ship.hit
+    if @ship == nil
      @fired_upon = true
-   else
-     @fired_upon = false
+   elsif @ship.hit
+     @fired_upon = true
     end
   end
 
-  def render
-    if @fired_upon == false
+  def render(option = false)
+    if option == true && @ship
+      "S"
+    elsif @fired_upon == false
       "."
-    elsif @fire_upon == false
+    elsif @ship == nil
       "M"
+    elsif @ship && @ship.sunk? == false
+      "H"
+    else "X"
     end
   end
-
 end
 
 # pry(main)> cell_1 = Cell.new("B4")
