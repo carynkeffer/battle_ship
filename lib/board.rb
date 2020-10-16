@@ -1,4 +1,3 @@
-
 class Board
   attr_reader :cells
   def initialize
@@ -22,6 +21,18 @@ class Board
       }
   end
 
+  def split_coordinates
+    @cells.each do |location, cell|
+      letter, digit = location[0], location[1]
+      require "pry"; binding.pry
+    end
+
+  # def
+  #   @split_coordinates.each_cons do |letters|
+  # end
+
+  end
+
   def valid_coordinate?(coordinate)
     @cells.one? do |key, cell|
       key == coordinate
@@ -29,10 +40,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    # ship.length == coordinate.count
-    # @cells.each_cons do
-    coordinates.each_cons do |coordinate|
-      coordinate
-    end
+     ship.length == coordinates.count
+
   end
 end
