@@ -27,4 +27,12 @@ class Board
       key == coordinate
     end
   end
+
+  def valid_placement?(ship, coordinates)
+    # ship.length == coordinate.count
+    # @cells.each_cons do
+    coordinates.each_cons do |coordinate|
+      coordinate
+    end
+  end
 end
