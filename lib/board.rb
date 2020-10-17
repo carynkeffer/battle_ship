@@ -21,24 +21,30 @@ class Board
       }
   end
 
-  def split_coordinates
-    letters = []
-    digits = []
-
-    @cells.each do |location, cell|
-      letters << location[0].ord 
-      digits << location[1].to_i 
-    end
-  end
-
   def valid_coordinate?(coordinate)
     @cells.one? do |key, cell|
       key == coordinate
     end
   end
 
-  def valid_placement?(ship, coordinates)
-     ship.length == coordinates.count
+  def split_coordinates?(coordinate)
+    letters = []
+    digits = []
 
+    coordinate.each do |coordinate|
+      letters << location[0].ord 
+      digits << location[1].to_i 
+    end
+    ((letters.first..letters.last).to_a == letters) ^
+    ((digits.first..digits.last).to_a == digits)
+  end
+
+  def valid_placement?(ship, coordinates)
+     if ship.length == coordinates.count && 
+        split_coordinates?(coordinate)
+        true
+     else 
+        false 
+     end 
   end
 end
