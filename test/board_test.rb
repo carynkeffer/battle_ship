@@ -15,6 +15,7 @@ class BoardTest < Minitest::Test
   def test_it_exists
 
     assert_instance_of Board, @board
+    assert_equal 16, @board.cells.count 
   end
 
   def test_if_coordinates_valid
