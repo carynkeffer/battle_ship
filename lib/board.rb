@@ -22,15 +22,13 @@ class Board
   end
 
   def split_coordinates
+    letters = []
+    digits = []
+
     @cells.each do |location, cell|
-      letter, digit = location[0], location[1]
-      require "pry"; binding.pry
+      letters << location[0].ord 
+      digits << location[1].to_i 
     end
-
-  # def
-  #   @split_coordinates.each_cons do |letters|
-  # end
-
   end
 
   def valid_coordinate?(coordinate)
