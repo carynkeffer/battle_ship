@@ -27,21 +27,23 @@ class Board
     end
   end
 
-  def split_coordinates?(coordinate)
+  def consecutive?(ship, coordinates)
     letters = []
     digits = []
 
-    coordinate.each do |coordinate|
-      letters << location[0].ord 
-      digits << location[1].to_i 
+    coordinates.each do |coordinate|
+      letters << coordinate[0].ord 
+      digits << coordinate[1].to_i 
     end
-    ((letters.first..letters.last).to_a == letters) ^
-    ((digits.first..digits.last).to_a == digits)
-  end
+    # ((letters.first..letters.last).to_a == letters) ^
+    # ((digits.first..digits.last).to_a == digits)
+    letters.each_cons(2).all? {|a, b| b == a+1}
+    digits.each_cons(2).all? {|a, b| b == a+1}
+    end
 
   def valid_placement?(ship, coordinates)
      if ship.length == coordinates.count && 
-        split_coordinates?(coordinate)
+        consecutive?(ship, coordinates)
         true
      else 
         false 
