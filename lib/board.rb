@@ -27,26 +27,51 @@ class Board
     end
   end
 
-  def consecutive?(ship, coordinates)
+  def letters_consecutive?(ship, coordinates)
     letters = []
-    digits = []
 
     coordinates.each do |coordinate|
-      letters << coordinate[0].ord 
+      letters << coordinate[0].ord
+    end  
+
+    if letters.uniq.count == 1
+      true
+    else
+    letters.each_cons(2).all? {|a, b| b == a+1} 
+    end 
+  end
+
+  def digits_consecutive?(ship, coordinates)
+      digits = []
+
+      coordinates.each do |coordinate|
       digits << coordinate[1].to_i 
-    end
-    # ((letters.first..letters.last).to_a == letters) ^
-    # ((digits.first..digits.last).to_a == digits)
-    letters.each_cons(2).all? {|a, b| b == a+1}
-    digits.each_cons(2).all? {|a, b| b == a+1}
-    end
+    end  
+    if digits.uniq.count == 1
+      true
+    else
+      digits.each_cons(2).all? {|a, b| b == a+1}
+    end 
+  end
+
+  def consecutive?(ship, coordinates)
+    digits_consecutive?(ship, coordinates) && letters_consecutive?(ship, coordinates)
+  end
+
+  def diagonal?(ship, coordinates)
+      letters = []
+      digits = []
+
+    coordinates.each do |coordinate|
+      letters << coordinate[0] 
+      digits << coordinate[1].to_i 
+    end 
+    !((letters.uniq.count > 1) && (digits.uniq.count > 1))
+  end 
 
   def valid_placement?(ship, coordinates)
-     if ship.length == coordinates.count && 
-        consecutive?(ship, coordinates)
-        true
-     else 
-        false 
-     end 
+       ship.length == coordinates.count && 
+        consecutive?(ship, coordinates)&&
+        diagonal?(ship, coordinates)
   end
 end
