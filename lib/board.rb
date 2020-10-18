@@ -1,5 +1,9 @@
+require './lib/ship'
+
 class Board
   attr_reader :cells
+              # :place
+
   def initialize
     @cells =  {
     "A1" => Cell.new("A1"),
@@ -19,6 +23,8 @@ class Board
     "D3" => Cell.new("D3"),
     "D4" => Cell.new("D4")
       }
+
+    # @place(ship, coordinates) = place
   end
 
   def valid_coordinate?(coordinate)
@@ -32,26 +38,26 @@ class Board
 
     coordinates.each do |coordinate|
       letters << coordinate[0].ord
-    end  
+    end
 
     if letters.uniq.count == 1
       true
     else
-    letters.each_cons(2).all? {|a, b| b == a+1} 
-    end 
+    letters.each_cons(2).all? {|a, b| b == a+1}
+    end
   end
 
   def digits_consecutive?(ship, coordinates)
       digits = []
 
       coordinates.each do |coordinate|
-      digits << coordinate[1].to_i 
-    end  
+      digits << coordinate[1].to_i
+    end
     if digits.uniq.count == 1
       true
     else
       digits.each_cons(2).all? {|a, b| b == a+1}
-    end 
+    end
   end
 
   def consecutive?(ship, coordinates)
@@ -63,15 +69,22 @@ class Board
       digits = []
 
     coordinates.each do |coordinate|
-      letters << coordinate[0] 
-      digits << coordinate[1].to_i 
-    end 
+      letters << coordinate[0]
+      digits << coordinate[1].to_i
+    end
     !((letters.uniq.count > 1) && (digits.uniq.count > 1))
-  end 
+  end
 
   def valid_placement?(ship, coordinates)
-       ship.length == coordinates.count && 
+       ship.length == coordinates.count &&
         consecutive?(ship, coordinates)&&
         diagonal?(ship, coordinates)
+  end
+
+  def place(ship, coordinates)
+    # coordinates.each do |cell|
+    #   require "pry"; binding.pry
+    #  coordinates << ship
+    @cells << Ship.new(ship, coordinates).to_h
   end
 end
