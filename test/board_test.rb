@@ -55,7 +55,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_ships_can_be_placed
-    # require "pry"; binding.pry
+    
     @board.place(@cruiser, ["A1", "A2", "A3"])
     cell_1 = @board.cells["A1"]
     cell_2 = @board.cells["A2"]
@@ -63,8 +63,7 @@ class BoardTest < Minitest::Test
     cell_1.ship
     cell_2.ship
     cell_3.ship
-require "pry"; binding.pry
+
     assert_equal true, cell_3.ship == cell_2.ship
   end
-
 end
