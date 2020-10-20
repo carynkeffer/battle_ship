@@ -77,6 +77,6 @@ class BoardTest < Minitest::Test
     expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
      assert_equal expected, @board.render
-    # @board.render(true)
+     # assert_equal true, @board.render
   end
 end
