@@ -90,4 +90,17 @@ class Board
       @cells[coordinate].place_ship(ship)
     end
   end
+
+  def render
+    ('a'..'d').each do |letter|
+      letter.render 
+    (1..4).each do |number|
+      @cells[] = "."
+
+"  1 2 3 4 \n" +
+"A . . . . \n" +
+"B . . . . \n" +
+"C . . . . \n" +
+"D . . . . \n"
+  end
 end
