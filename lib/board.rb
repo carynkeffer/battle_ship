@@ -2,7 +2,6 @@ require './lib/ship'
 
 class Board
   attr_reader :cells
-              # :place
 
   def initialize
     @cells =  {
@@ -23,8 +22,6 @@ class Board
     "D3" => Cell.new("D3"),
     "D4" => Cell.new("D4")
       }
-
-    # @place(ship, coordinates) = place
   end
 
   def valid_coordinate?(coordinate)
@@ -76,21 +73,21 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-       ship.length == coordinates.count &&
-        consecutive?(ship, coordinates) &&
-        diagonal?(ship, coordinates) 
-
+      overlap?(coordinates) &&
+      ship.length == coordinates.count &&
+      consecutive?(ship, coordinates) &&
+      diagonal?(ship, coordinates)
   end
 
-  def overlap?(ship, coordinates)
-    coordinates.each do |coordinate|
-      @cells[coordinate].place_ship(ship)
-    end 
+  def overlap?(coordinates)
+      coordinates.all? do |cell|
+        @cells[cell].empty?
+      end
   end
 
   def place(ship, coordinates)
     coordinates.each do |coordinate|
-      @cells[coordinate].place_ship(ship) 
-    end   
+      @cells[coordinate].place_ship(ship)
+    end
   end
 end
